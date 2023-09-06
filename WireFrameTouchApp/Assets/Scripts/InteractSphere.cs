@@ -9,6 +9,6 @@ public class InteractSphere : MonoBehaviour
     private void OnMouseDrag()
     {
         rotX = Input.GetAxis("Mouse X") * rotSpeed * Mathf.Deg2Rad;
-        transform.Rotate(Vector3.right, -rotX);
+        transform.Rotate(Vector3.forward, -rotX);
     }
 }

@@ -38,7 +38,7 @@ public class SwipeBehavior : MonoBehaviour
     {
         SelectSphere();
         Swipe();
-        //ResetSpherePosition();
+        RotateSphereParent();
         MoveCameraAndSpherePositionAndActivateSphere();
     }
 
@@ -115,6 +115,7 @@ public class SwipeBehavior : MonoBehaviour
                 Debug.Log("down swipe");
                 cameraTargetYPos = cameraInitYPos;
                 spherTargetYPos = 0;
+                StopAllCoroutines();
                 sphereDetected.GetComponent<OuterShell>().EnableOuterSphere(false);
             }
 
@@ -132,8 +133,11 @@ public class SwipeBehavior : MonoBehaviour
                     targetRotation = Quaternion.Euler(0, spherParent.localEulerAngles.y - 120f, 0);
                 }
             }
-
         }
+    }
+
+    void RotateSphereParent()
+    {
         float rotationSpeed = 10f; // Adjust the speed as needed.
         float step = rotationSpeed * Time.deltaTime;
         spherParent.localRotation = Quaternion.Slerp(spherParent.localRotation, targetRotation, step);
@@ -148,7 +152,6 @@ public class SwipeBehavior : MonoBehaviour
             sphereDetected.transform.position = new Vector3(sphereDetected.transform.position.x, Mathf.Lerp(sphereDetected.transform.position.y, spherTargetYPos, step), sphereDetected.transform.position.z);
         }
     }
-
     IEnumerator ActivateOuterShell()
     {
         yield return new WaitForSeconds(1);

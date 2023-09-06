@@ -4,21 +4,24 @@ using UnityEngine;
 
 public class OuterShell : MonoBehaviour
 {
-    public bool activateOuterShell;
+    //Prefabs neede
     public GameObject vertexPositionsPrefab; // Assign your cube prefab in the Unity inspector.
     public GameObject lineRendererPrefab; // Assign your line renderer prefab in the Unity inspector.
+    public GameObject trianglePrefab;
+
+    //Collection of List for the inner and outer vertex, triangles, and line renderers
     private List<GameObject> outerVertexPos = new List<GameObject>();
     private List<GameObject> innerVertexPos = new List<GameObject>();
     public List<Vector3> innerPos;
     public List<Vector3> outerPos;
     private List<LineRenderer> lineRenderers = new List<LineRenderer>();
-    public GameObject trianglePrefab;
     private List<GameObject> triangles = new List<GameObject>();
     public List<Vector3> trianglePoints;
-    public Transform outerSphereParent;
-    MeshFilter meshFilter;
 
-    public float outerSphereRadius; // Adjust this value to change the radius of the sphere.
+    public Transform outerSphereParent; //used to activate and deactivate outer shell
+    public float outerSphereRadius;
+
+    MeshFilter meshFilter;
 
     private void Start()
     {
@@ -27,6 +30,7 @@ public class OuterShell : MonoBehaviour
         ExtractVertexAndAddItToAList(meshFilter);
         CreateTriangles();
     }
+
     private void Update()
     {
         UpdateLineRendererPosition();
@@ -96,6 +100,7 @@ public class OuterShell : MonoBehaviour
         GameObject vertex = Instantiate(vertexPositionsPrefab, position, Quaternion.identity);
         vertex.transform.SetParent(outerSphereParent);
         vertex.SetActive(false);
+
         // Calculate the rotation to align the cube's up direction with the provided upDirection.
         Quaternion rotation = Quaternion.FromToRotation(Vector3.up, upDirection);
 
@@ -113,6 +118,7 @@ public class OuterShell : MonoBehaviour
         // Instantiate your line renderer prefab.
         GameObject lineRendererObject = Instantiate(lineRendererPrefab);
         lineRendererObject.transform.SetParent(outerSphereParent);
+
         // Get the LineRenderer component from the instantiated object.
         LineRenderer lineRenderer = lineRendererObject.GetComponent<LineRenderer>();
 
