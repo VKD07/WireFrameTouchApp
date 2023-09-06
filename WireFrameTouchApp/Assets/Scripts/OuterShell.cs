@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class OuterShell : MonoBehaviour
 {
+    public bool activateOuterShell;
     public GameObject vertexPositionsPrefab; // Assign your cube prefab in the Unity inspector.
     public GameObject lineRendererPrefab; // Assign your line renderer prefab in the Unity inspector.
     private List<GameObject> outerVertexPos = new List<GameObject>();
@@ -14,14 +15,22 @@ public class OuterShell : MonoBehaviour
     public GameObject trianglePrefab;
     private List<GameObject> triangles = new List<GameObject>();
     public List<Vector3> trianglePoints;
+    public Transform outerSphereParent;
+    MeshFilter meshFilter;
 
-    public float sphereRadius; // Adjust this value to change the radius of the sphere.
-    private void Awake()
+    public float outerSphereRadius; // Adjust this value to change the radius of the sphere.
+
+    private void Start()
     {
-        MeshFilter meshFilter = GetComponent<MeshFilter>();
+        meshFilter = GetComponent<MeshFilter>();
+        outerSphereParent.gameObject.SetActive(false);
         ExtractVertexAndAddItToAList(meshFilter);
         CreateTriangles();
-}
+    }
+    private void Update()
+    {
+        UpdateLineRendererPosition();
+    }
 
     private void ExtractVertexAndAddItToAList(MeshFilter meshFilter)
     {
@@ -34,7 +43,6 @@ public class OuterShell : MonoBehaviour
             List<Vector3> uniqueWorldVertices = new List<Vector3>();
             for (int i = 0; i < vertices.Length; i++)
             {
-
                 Vector3 worldVertex = transform.TransformPoint(vertices[i]);
                 if (!uniqueWorldVertices.Contains(worldVertex))
                 {
@@ -42,7 +50,7 @@ public class OuterShell : MonoBehaviour
 
                     // sphereRadius = Random.Range(1, 2f);
                     // Calculate the scaled position for the cube based on the desired sphere radius.
-                    Vector3 scaledPosition = ScalePosition(worldVertex, sphereRadius);
+                    Vector3 scaledPosition = ScalePosition(worldVertex, outerSphereRadius);
 
                     // Instantiate a cube at the scaled position with the correct orientation.
                     GameObject offsetCube = InstantiateCubeAtPositionWithOrientation(scaledPosition, transform.TransformDirection(normals[i]));
@@ -63,7 +71,7 @@ public class OuterShell : MonoBehaviour
                     outerPos.Add(scaledPosition);
 
                 }
-                Vector3 trianglePos = ScalePosition(worldVertex, sphereRadius);
+                Vector3 trianglePos = ScalePosition(worldVertex, outerSphereRadius);
                 trianglePoints.Add(trianglePos);
             }
         }
@@ -86,6 +94,7 @@ public class OuterShell : MonoBehaviour
     {
         // Instantiate your cube prefab at the specified position.
         GameObject vertex = Instantiate(vertexPositionsPrefab, position, Quaternion.identity);
+        vertex.transform.SetParent(outerSphereParent);
         vertex.SetActive(false);
         // Calculate the rotation to align the cube's up direction with the provided upDirection.
         Quaternion rotation = Quaternion.FromToRotation(Vector3.up, upDirection);
@@ -103,7 +112,7 @@ public class OuterShell : MonoBehaviour
     {
         // Instantiate your line renderer prefab.
         GameObject lineRendererObject = Instantiate(lineRendererPrefab);
-        lineRendererObject.transform.SetParent(transform);
+        lineRendererObject.transform.SetParent(outerSphereParent);
         // Get the LineRenderer component from the instantiated object.
         LineRenderer lineRenderer = lineRendererObject.GetComponent<LineRenderer>();
 
@@ -126,7 +135,7 @@ public class OuterShell : MonoBehaviour
                 if (random == 0)
                 {
                     GameObject triangleObject = Instantiate(trianglePrefab);
-                    triangleObject.transform.SetParent(transform);
+                    triangleObject.transform.SetParent(outerSphereParent);
 
                     //int random = Random.Range(0, 2);
                     //if (random == 0)
@@ -177,11 +186,6 @@ public class OuterShell : MonoBehaviour
         triangle.material = triangleMat;
     }
 
-    private void Update()
-    {
-        UpdateLineRendererPosition();
-    }
-
     private void UpdateLineRendererPosition()
     {
         // Update line renderer positions based on cube and vertex positions.
@@ -189,5 +193,10 @@ public class OuterShell : MonoBehaviour
         {
             lineRenderers[i].SetPositions(new Vector3[] { innerVertexPos[i].transform.position, outerVertexPos[i].transform.position });
         }
+    }
+
+    public void EnableOuterSphere(bool enable)
+    {
+        outerSphereParent.gameObject.SetActive(enable);
     }
 }
