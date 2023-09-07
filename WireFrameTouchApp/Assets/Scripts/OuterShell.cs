@@ -99,16 +99,13 @@ public class OuterShell : MonoBehaviour
         // Instantiate your cube prefab at the specified position.
         GameObject vertex = Instantiate(vertexPositionsPrefab, position, Quaternion.identity);
         vertex.transform.SetParent(outerSphereParent);
-        vertex.SetActive(false);
+        //vertex.SetActive(false);
 
         // Calculate the rotation to align the cube's up direction with the provided upDirection.
         Quaternion rotation = Quaternion.FromToRotation(Vector3.up, upDirection);
 
         // Apply the rotation to the cube.
         vertex.transform.rotation = rotation;
-
-        // Make the cube a child of this GameObject's transform.
-        vertex.transform.SetParent(transform);
 
         return vertex;
     }
