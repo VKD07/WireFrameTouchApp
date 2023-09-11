@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OuterShell : MonoBehaviour
 {
@@ -15,8 +16,9 @@ public class OuterShell : MonoBehaviour
     public List<Vector3> innerPos;
     public List<Vector3> outerPos;
     private List<LineRenderer> lineRenderers = new List<LineRenderer>();
-    private List<GameObject> triangles = new List<GameObject>();
+    //private List<GameObject> triangles = new List<GameObject>();
     public List<Vector3> trianglePoints;
+    public List<GameObject> vertexButtons;
 
     public Transform outerSphereParent; //used to activate and deactivate outer shell
     public float outerSphereRadius;
@@ -106,7 +108,7 @@ public class OuterShell : MonoBehaviour
 
         // Apply the rotation to the cube.
         vertex.transform.rotation = rotation;
-
+        vertexButtons.Add(vertex);
         return vertex;
     }
 
@@ -157,7 +159,7 @@ public class OuterShell : MonoBehaviour
                     triangleMeshFilter.mesh = triangleMesh;
 
                     // Add the triangle object to the list.
-                    triangles.Add(triangleObject);
+                    //triangles.Add(triangleObject);
 
                     CreateTriangleMat(triangleObject.GetComponent<Renderer>());
                 }

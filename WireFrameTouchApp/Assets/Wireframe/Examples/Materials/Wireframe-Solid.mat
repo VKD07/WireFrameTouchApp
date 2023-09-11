@@ -75,12 +75,12 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _WireSmoothness: 8.4
-    - _WireThickness: 660
+    - _WireSmoothness: 6.34
+    - _WireThickness: 289
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.51604956, g: 0.6698113, b: 0.65758026, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _WireColor: {r: 0, g: 1, b: 0.98823524, a: 1}
+    - _WireColor: {r: 0.16464931, g: 0.7075472, b: 0.70116013, a: 1}
   m_BuildTextureStacks: []

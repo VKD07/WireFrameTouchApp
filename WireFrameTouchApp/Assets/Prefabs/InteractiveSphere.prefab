@@ -59,6 +59,7 @@ GameObject:
   - component: {fileID: 4244850878345484799}
   - component: {fileID: 3259904597553510232}
   - component: {fileID: 1740665864040944526}
+  - component: {fileID: -9132693008907464602}
   m_Layer: 3
   m_Name: InteractiveSphere
   m_TagString: Untagged
@@ -145,12 +146,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c392e8cb6738304b916e8482f01990d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vertexPositionsPrefab: {fileID: 6908356686156435336, guid: 5dfdc0a4c9adea44a97ab702a66b125a, type: 3}
+  vertexPositionsPrefab: {fileID: 6908356686156435336, guid: b2993633cdeac4e43b81856b46cd2dfa, type: 3}
   lineRendererPrefab: {fileID: 7892462839326555139, guid: 773da9dd181cb7a428780c8c0cd9d95b, type: 3}
   trianglePrefab: {fileID: 7112829916702137151, guid: dd3b430b0237ed54aae895029f7b68ab, type: 3}
   innerPos: []
   outerPos: []
   trianglePoints: []
+  vertexButtons: []
   outerSphereParent: {fileID: 2444110158311614726}
   outerSphereRadius: 2
 --- !u!114 &4244850878345484799
@@ -192,6 +194,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotSpeed: 70
+--- !u!114 &-9132693008907464602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2443274343663679541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6052c7bfebad59e4f9d6307d3a296372, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vertexVideo:
+  - name: IDEX
+    video: {fileID: 0}
+  - name: ADDA
+    video: {fileID: 0}
+  - name: ADNOC
+    video: {fileID: 0}
 --- !u!1 &4654998710946426366
 GameObject:
   m_ObjectHideFlags: 0
