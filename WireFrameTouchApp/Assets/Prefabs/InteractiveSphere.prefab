@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2444110158311614726}
   - component: {fileID: 3918886075541358776}
+  - component: {fileID: 7962029284270204802}
   m_Layer: 3
-  m_Name: OuterSphere
+  m_Name: OuterSphereManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,6 +45,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9a16e8597c3b3e42a39f62a17acb202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7962029284270204802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2310858091755411590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6052c7bfebad59e4f9d6307d3a296372, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outerVertexButtons: {fileID: 4244850878345484798}
+  fileExtension: mp4
+  m_videoPaths: []
+  numberOfVids: 0
 --- !u!1 &2443274343663679541
 GameObject:
   m_ObjectHideFlags: 0
@@ -59,7 +76,6 @@ GameObject:
   - component: {fileID: 4244850878345484799}
   - component: {fileID: 3259904597553510232}
   - component: {fileID: 1740665864040944526}
-  - component: {fileID: -9132693008907464602}
   m_Layer: 3
   m_Name: InteractiveSphere
   m_TagString: Untagged
@@ -194,25 +210,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotSpeed: 70
---- !u!114 &-9132693008907464602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2443274343663679541}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6052c7bfebad59e4f9d6307d3a296372, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vertexVideo:
-  - name: IDEX
-    video: {fileID: 0}
-  - name: ADDA
-    video: {fileID: 0}
-  - name: ADNOC
-    video: {fileID: 0}
 --- !u!1 &4654998710946426366
 GameObject:
   m_ObjectHideFlags: 0

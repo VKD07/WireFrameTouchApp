@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class OuterShell : MonoBehaviour
 {
@@ -59,9 +60,9 @@ public class OuterShell : MonoBehaviour
                     Vector3 scaledPosition = ScalePosition(worldVertex, outerSphereRadius);
 
                     // Instantiate a cube at the scaled position with the correct orientation.
-                    GameObject offsetCube = InstantiateCubeAtPositionWithOrientation(scaledPosition, transform.TransformDirection(normals[i]));
+                    GameObject offsetCube = InstantiateVertexAtPositionWithOrientation(scaledPosition, transform.TransformDirection(normals[i]), true);
 
-                    GameObject origCube = InstantiateCubeAtPositionWithOrientation(worldVertex, transform.TransformDirection(normals[i]));
+                    GameObject origCube = InstantiateVertexAtPositionWithOrientation(worldVertex, transform.TransformDirection(normals[i]), false);
 
                     // Instantiate a line renderer between the offset and the original cube position.
                     LineRenderer lineRenderer = InstantiateLineRenderer(scaledPosition, worldVertex);
@@ -96,11 +97,15 @@ public class OuterShell : MonoBehaviour
         return transform.position + direction * radius;
     }
 
-    private GameObject InstantiateCubeAtPositionWithOrientation(Vector3 position, Vector3 upDirection)
+    private GameObject InstantiateVertexAtPositionWithOrientation(Vector3 position, Vector3 upDirection, bool isOuter)
     {
         // Instantiate your cube prefab at the specified position.
         GameObject vertex = Instantiate(vertexPositionsPrefab, position, Quaternion.identity);
         vertex.transform.SetParent(outerSphereParent);
+        if(isOuter)
+        {
+            vertexButtons.Add(vertex);
+        }
         //vertex.SetActive(false);
 
         // Calculate the rotation to align the cube's up direction with the provided upDirection.
@@ -108,7 +113,6 @@ public class OuterShell : MonoBehaviour
 
         // Apply the rotation to the cube.
         vertex.transform.rotation = rotation;
-        vertexButtons.Add(vertex);
         return vertex;
     }
 
